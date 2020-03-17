@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Primera pagina vue</title>
+</head>
+<body>
+
+    <div id="app">
+        <h1>{{titulo}}</h1>
+        <ul>
+            <li v-for="fruta of frutas">
+                Hay {{fruta.cantidad}} {{fruta.nombre}}/s
+                <span v-if="fruta.cantidad < 20"> - STOCK BAJO</span>
+            </li>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="01.js"></script>
+</body>
+</html>
