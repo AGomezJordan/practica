@@ -4,6 +4,9 @@
         <ul>
             <li v-for="tarea of tareas" :key="tarea.id">
                 {{tarea.id}} - {{tarea.nombre}}
+                <router-link :to="{name: 'editar', params:{id: tarea.id}}">
+                    <button>Editar</button>
+                </router-link>
             </li>
         </ul>
     </div>
