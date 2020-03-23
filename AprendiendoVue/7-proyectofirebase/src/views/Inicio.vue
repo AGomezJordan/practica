@@ -11,6 +11,9 @@
                     <router-link :to="{name: 'editar', params:{id: tarea.id}}">
                         <button class="btn-warning btn-sm text-light">Editar</button>
                     </router-link>
+                    <router-link :to="{name: 'mostrar', params:{id: tarea.id}}">
+                        <button class="ml-2 btn-primary btn-sm text-light">Mostrar</button>
+                    </router-link>
                     <button class="btn-danger btn-sm ml-2" @click="eliminar(tarea.id)">Eliminar</button>
                 </div>
             </li>

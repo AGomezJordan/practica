@@ -18,6 +18,11 @@ const routes = [
     path: '/agregar',
     name: 'agregar',
     component: () => import(/* webpackChunkName: "editar" */ '../views/Agregar.vue')
+  },
+  {
+    path: '/mostrar/:id',
+    name: 'mostrar',
+    component: () => import(/* webpackChunkName: "editar" */ '../views/Mostrar.vue')
   }
 ]
 

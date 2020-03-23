@@ -8,7 +8,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     tareas: [],
-    tarea: {nombre: '', id: ''}
+    tarea: {nombre: '', id: '', comentario: ''}
   },
   mutations: {
     setTareas(state, tareas){
@@ -32,6 +32,7 @@ export default new Vuex.Store({
           //console.log(doc.data())
           let tarea = doc.data();
           tarea.id = doc.id;
+          tarea.comentario = doc.comentario;
           tareas.push(tarea);
         });
       });
@@ -48,15 +49,17 @@ export default new Vuex.Store({
   },
   editar({commit}, tarea){
     db.collection("tareas").doc(tarea.id).update({
-        nombre: tarea.nombre
+        nombre: tarea.nombre,
+        comentario: tarea.comentario
     })
     .then(() => {
         router.push({name: 'Inicio'})
     })
   },
-  agregar({commit}, nombre){
+  agregar({commit}, tarea){
         db.collection("tareas").add({
-            nombre: nombre
+            nombre: tarea.nombre,
+            comentario: tarea.comentario
         })
         .then(() => {
             router.push({name: 'Inicio'})
