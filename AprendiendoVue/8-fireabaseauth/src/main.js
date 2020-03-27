@@ -7,7 +7,7 @@ var firebase = require("firebase/app");
 require("firebase/app");
 require("firebase/auth");
 //require("firebase/database");
-//require("firebase/firestore");
+require("firebase/firestore");
 //require("firebase/messaging");
 //require("firebase/functions");
 var firebaseConfig = {
@@ -20,7 +20,9 @@ var firebaseConfig = {
   appId: "1:819381632676:web:3d214b2963369d1b5eb031"
 };
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+firebaseApp.firestore();
+export default firebaseApp.firestore();
 
 Vue.config.productionTip = false
 

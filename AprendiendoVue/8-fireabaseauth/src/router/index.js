@@ -20,6 +20,24 @@ const routes = [
     path: '/iniciarsesion',
     name: 'iniciarsesion',
     component: () => import('../views/InicioSesion.vue')
+  },
+  {
+    path: '/agregar',
+    name: 'agregar',
+    component: () => import('../views/Agregar.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/editar/:id',
+    name: 'editar',
+    component: () => import('../views/Editar.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/mostrar/:id',
+    name: 'mostrar',
+    component: () => import('../views/Mostrar.vue'),
+    meta: { requiresAuth: true }
   }
 ]
 
