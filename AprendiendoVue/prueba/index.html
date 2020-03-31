@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var hola = async function() {
+        let json = "http://localhost:80/Practica/api.php?func=prueba&texto=prueba&user=alvaro"
+        const data = await fetch(json);
+        const cursos = await data.json();
+        console.log(cursos.results)
+    }
+    hola()
+</script>
