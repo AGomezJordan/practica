@@ -10,20 +10,24 @@
                 <div class="input-group-prepend">
                     <div class="input-group-text">Nombre</div>
                 </div>
-                <input v-model="tarea.nombre" type="text" class="form-control">
+                <input :class="{'is-invalid': $v.tarea.nombre.$error}" v-model.lazy="$v.tarea.nombre.$model" type="text" class="form-control">
             </div>
             <div class="input-group mb-2 mr-sm-2">
                 <div class="input-group-prepend">
                     <div class="input-group-text">Comentario</div>
                 </div>
-                <input v-model="tarea.comentario" type="text" class="form-control">
+                <input :class="{'is-invalid': $v.tarea.comentario.$error}" v-model.lazy="$v.tarea.comentario.$model" type="text" class="form-control">
             </div>
-            <button type="submit" class="btn btn-success mb-2">Editar</button>
+            <button type="submit" class="btn btn-success mb-2" :disabled="$v.tarea.$invalid">Editar</button>
         </form>
+        <p class="text-danger" v-if="!$v.tarea.nombre.required && !carga">Campo nombre requerido*</p>
+        <p class="text-danger" v-if="!$v.tarea.nombre.minLength && !carga">Campo nombre minimo 3 caracteres</p>
+        <p class="text-danger" v-if="!$v.tarea.comentario.required && !carga">Campo comentario requerido*</p>
     </div>
 </template>
 
 <script>
+    import { required, minLength } from 'vuelidate/lib/validators'
     import PulseLoader from 'vue-spinner/src/PulseLoader'
     import {mapActions, mapState} from 'vuex'
     export default {
@@ -44,6 +48,12 @@
         },
         components:{
             PulseLoader
+        },
+        validations:{
+            tarea:{
+                nombre:{required, minLength: minLength(3)},
+                comentario: {required}
+            }
         }
     }
 </script>

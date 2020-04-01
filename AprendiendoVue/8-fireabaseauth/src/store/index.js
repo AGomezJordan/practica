@@ -91,10 +91,10 @@ export default new Vuex.Store({
               tareas.push(tarea);
           });
           setTimeout(() =>{
+              commit('setTareas', tareas)
               commit('cargarFirebase', false);
           }, 500)
       });
-      commit('setTareas', tareas)
     },
     getTarea({commit}, id){
         commit('cargarFirebase', true);
@@ -136,7 +136,6 @@ export default new Vuex.Store({
         const usuario = firebase.auth().currentUser;
       db.collection(usuario.email).doc(id).delete()
           .then(() =>{
-              console.log("Tarea Eliminada")
               //dispatch('getTareas')
               commit('eliminar',id)
           })
