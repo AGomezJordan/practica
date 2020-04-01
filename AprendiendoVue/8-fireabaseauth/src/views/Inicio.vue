@@ -4,7 +4,12 @@
         <router-link :to="{name: 'agregar'}">
             <button class="btn btn-success btn-block">Agregar</button>
         </router-link>
-        <ul class="list-group mt-5">
+
+        <div v-if="carga" class="text-center mt-5">
+            <h3>Cargando contenido....</h3>
+            <pulse-loader></pulse-loader>
+        </div>
+        <ul class="list-group mt-5" v-if="!carga">
             <li class="list-group-item text-left" v-for="tarea of tareas" :key="tarea.id">
                 {{tarea.nombre}}
                 <div class="float-right">
@@ -22,6 +27,7 @@
 </template>
 
 <script>
+    import PulseLoader from 'vue-spinner/src/PulseLoader'
     import {mapState, mapActions} from 'vuex'
     export default {
         name: "Inicio",
@@ -32,7 +38,10 @@
           this.getTareas()
         },
         computed:{
-            ...mapState(['usuario', 'tareas'])
+            ...mapState(['usuario', 'tareas', 'carga'])
+        },
+        components: {
+            PulseLoader
         }
     }
 </script>

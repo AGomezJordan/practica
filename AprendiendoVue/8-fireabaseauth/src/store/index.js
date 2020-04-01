@@ -11,7 +11,8 @@ export default new Vuex.Store({
     usuario: '',
     error: '',
     tareas: [],
-    tarea: {nombre: '', id: '', comentario: ''}
+    tarea: {nombre: '', id: '', comentario: ''},
+    carga: false
   },
   mutations: {
     setUsuario(state,payload){
@@ -30,6 +31,9 @@ export default new Vuex.Store({
         state.tareas = state.tareas.filter(doc =>{
             return doc.id != id
         })
+    },
+    cargarFirebase(state, playload){
+        state.carga = playload
     }
   },
   actions: {
@@ -74,6 +78,7 @@ export default new Vuex.Store({
     router.push({name: 'iniciarsesion'})
     },
     getTareas({commit}){
+      commit('cargarFirebase', true);
       const usuario = firebase.auth().currentUser;
       const tareas = [];
       db.collection(usuario.email).get().then((snapshot) => {
@@ -85,17 +90,24 @@ export default new Vuex.Store({
               tarea.comentario = doc.comentario;
               tareas.push(tarea);
           });
+          setTimeout(() =>{
+              commit('cargarFirebase', false);
+          }, 500)
       });
       commit('setTareas', tareas)
     },
     getTarea({commit}, id){
+        commit('cargarFirebase', true);
         const usuario = firebase.auth().currentUser;
       db.collection(usuario.email).doc(id).get().then((doc) => {
           //console.log(doc.data())
           //console.log(doc.id)
           let tarea = doc.data();
           tarea.id = doc.id;
-          commit('setTarea', tarea)
+          setTimeout(() =>{
+              commit('cargarFirebase', false);
+              commit('setTarea', tarea)
+          }, 500)
       })
     },
     editar({commit}, tarea){
@@ -109,12 +121,14 @@ export default new Vuex.Store({
           })
     },
     agregar({commit}, tarea){
+        commit('cargarFirebase', true);
         const usuario = firebase.auth().currentUser;
       db.collection(usuario.email).add({
           nombre: tarea.nombre,
           comentario: tarea.comentario
       })
           .then(() => {
+              commit('cargarFirebase', false);
               router.push({name: 'inicio'})
           })
     },
