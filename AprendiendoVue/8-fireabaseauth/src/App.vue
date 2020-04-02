@@ -1,11 +1,29 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link :to="{name: 'inicio'}" v-if="existeUsuario">Inicio</router-link> |
-      <router-link :to="{name: 'registro'}" v-if="!existeUsuario">Registro</router-link> |
-      <router-link :to="{name: 'iniciarsesion'}" v-if="!existeUsuario">Iniciar Sesion</router-link> |
-      <a @click="cerrarSesion" v-if="existeUsuario">Cerrar Sesion</a>
-    </div>
+  <div id="app" class="container">
+    <nav class="navbar-fixed-top navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active" v-if="existeUsuario">
+            <router-link class="nav-link" :to="{name: 'inicio'}">INICIO</router-link>
+          </li>
+          <li class="nav-item active" v-if="!existeUsuario">
+            <router-link class="nav-link" :to="{name: 'registro'}">REGISTRO</router-link>
+          </li>
+          <li class="nav-item active" v-if="!existeUsuario">
+            <router-link class="nav-link" :to="{name: 'iniciarsesion'}">INICIAR SESION</router-link>
+          </li>
+          <li class="nav-item active" v-if="existeUsuario">
+            <a class="nav-link" @click="cerrarSesion">CERRAR SESION</a>
+          </li>
+
+        </ul>
+      </div>
+    </nav>
     <router-view/>
   </div>
 </template>

@@ -10,13 +10,13 @@
                 <div class="input-group-prepend">
                     <div class="input-group-text">Nombre</div>
                 </div>
-                <input :class="{'is-invalid': $v.tarea.nombre.$error}" v-model.lazy="$v.tarea.nombre.$model" type="text" class="form-control">
+                <input :class="{'is-invalid': $v.tarea.nombre.$error}" v-model="$v.tarea.nombre.$model" type="text" class="form-control">
             </div>
             <div class="input-group mb-2 mr-sm-2">
                 <div class="input-group-prepend">
                     <div class="input-group-text">Comentario</div>
                 </div>
-                <input :class="{'is-invalid': $v.tarea.comentario.$error}" v-model.lazy="$v.tarea.comentario.$model" type="text" class="form-control">
+                <input :class="{'is-invalid': $v.tarea.comentario.$error}" v-model="$v.tarea.comentario.$model" type="text" class="form-control">
             </div>
             <button type="submit" class="btn btn-success mb-2" :disabled="$v.tarea.$invalid">Editar</button>
         </form>

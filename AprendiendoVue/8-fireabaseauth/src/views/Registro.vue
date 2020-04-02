@@ -23,7 +23,7 @@
             <!-- Boton -->
             <br><button class="btn btn-dark" type="submit" :disabled="$v.$invalid">Crear Usuario</button>
         </form>
-        <p>{{error}}</p>
+        <p v-if="error === 'auth/email-already-in-use'" class="text-danger">El usuario ya esta registrado</p>
     </div>
 </template>
 

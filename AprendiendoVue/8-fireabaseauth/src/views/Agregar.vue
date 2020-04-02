@@ -7,14 +7,14 @@
                     <div class="input-group-text">Nombre</div>
                 </div>
                 <input :class="{'is-invalid': $v.nombre.$error, 'is-valid': !$v.nombre.$invalid}"
-                   v-model.lazy="$v.nombre.$model" type="text" class="form-control">
+                   v-model="$v.nombre.$model" type="text" class="form-control">
             </div>
             <div class="input-group mb-2 mr-sm-2">
                 <div class="input-group-prepend">
                     <div class="input-group-text">Comentario</div>
                 </div>
                 <input :class="{'is-invalid': $v.comentario.$error, 'is-valid': !$v.comentario.$invalid}"
-                   v-model.lazy="$v.comentario.$model" type="text" class="form-control">
+                   v-model="$v.comentario.$model" type="text" class="form-control">
             </div>
             <button :disabled="$v.$invalid || carga" type="submit" class="btn btn-success mb-2">Agregar</button>
         </form><br>

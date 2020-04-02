@@ -3,7 +3,7 @@
         <h1>Iniciar Usuario</h1>
         <form @submit.prevent="iniciarSesion({email: $v.email.$model, pass:$v.pass.$model})">
             <input :class="{'is-invalid': $v.email.$error, 'is-valid': !$v.email.$invalid}" class="form-control my-2"
-             v-model.lazy="$v.email.$model" type="email" placeholder="Email">
+             v-model="$v.email.$model" type="email" placeholder="Email">
             <p class="text-danger" v-if="!$v.email.required"><small>Campo requerido*</small></p>
             <p class="text-danger" v-if="!$v.email.email"><small>Introduzca un email valido</small></p>
             <input :class="{'is-invalid': $v.pass.$error, 'is-valid': !$v.pass.$invalid}" class="form-control my-2"
