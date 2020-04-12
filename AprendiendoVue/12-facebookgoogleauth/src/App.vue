@@ -8,8 +8,8 @@
         <v-icon>mdi-home</v-icon>
       </v-btn>
 
-      <v-btn  @click="push('Ingreso')">
-        <v-icon>mdi-logout-variant</v-icon>
+      <v-btn  @click="cerrarSesion()">
+        <v-icon>mdi-logout</v-icon>
       </v-btn>
 
     </v-bottom-navigation>
@@ -21,6 +21,7 @@
 
 <script>
   import router from '@/router'
+  import {mapActions} from 'vuex'
 export default {
   name: 'App',
   data(){
@@ -31,7 +32,8 @@ export default {
   methods:{
     push(name){
         router.push({name})
-    }
+    },
+    ...mapActions(['cerrarSesion'])
   },
   computed: {
     color() {

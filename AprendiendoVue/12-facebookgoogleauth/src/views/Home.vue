@@ -1,16 +1,15 @@
 <template>
   <div>
-    <v-container>
-      <v-row>
-        <v-col cols="6">HOLA</v-col>
-        <v-col cols="6">HOLA</v-col>
-      </v-row>
-    </v-container>
+    <h1>BIENVENID@ <span class="display-1 black--text">{{usuario.nombre}}</span></h1>
   </div>
 </template>
 
 <script>
+  import {mapState} from 'vuex'
 export default {
-  name: 'Home'
+  name: 'Home',
+  computed:{
+    ...mapState(['usuario'])
+  }
 }
 </script>
