@@ -35,6 +35,13 @@
                         >
                             INICIAR SESION
                         </v-btn>
+                        <v-btn
+                                color="primary"
+                                class="mr-4"
+                                @click="crearCuenta"
+                        >
+                            REGISTRATE
+                        </v-btn>
                     </v-form>
                 </v-card-text>
             </v-card>
@@ -45,7 +52,7 @@
                         max-width="290"
                 >
                     <v-card>
-                        <v-card-title class="headline display-3">Upss... Algo no ha ido bien</v-card-title>
+                        <v-card-title class="headline display-3">{{mensaje2}}</v-card-title>
 
                         <v-card-text>
                             {{mensaje}}
@@ -72,6 +79,7 @@
 <script>
     import {required, maxLength, minLength} from 'vuelidate/lib/validators';
     import {mapActions, mapState, mapMutations} from 'vuex'
+    import router from '@/router'
     export default {
         name: "IniciarSesion",
         data(){
@@ -89,7 +97,7 @@
             }
         },
         computed:{
-          ...mapState(['mensaje', 'dialog'])
+          ...mapState(['mensaje', 'mensaje2', 'dialog'])
         },
         validations:{
           usuario:{required, maxLength:maxLength(10)},
@@ -97,7 +105,10 @@
         },
         methods:{
             ...mapActions(['iniciarSesion']),
-            ...mapMutations(['setDialog'])
+            ...mapMutations(['setDialog']),
+            crearCuenta(){
+                router.push({name: 'Registro'})
+            }
         },
     }
 </script>

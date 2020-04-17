@@ -44,6 +44,13 @@
                         >
                             CREAR CUENTA
                         </v-btn>
+                        <v-btn
+                                color="primary"
+                                class="mr-4"
+                                @click="iniciarSesion"
+                        >
+                            INICIAR SESION
+                        </v-btn>
                     </v-form>
                 </v-card-text>
             </v-card>
@@ -51,11 +58,11 @@
 
             <v-row justify="center">
                 <v-dialog
-                        v-model="message"
+                        v-model="dialog"
                         max-width="290"
                 >
                     <v-card>
-                        <v-card-title class="headline display-3">Upss... Algo no ha ido bien</v-card-title>
+                        <v-card-title class="headline display-3">{{mensaje2}}</v-card-title>
 
                         <v-card-text>
                             {{mensaje}}
@@ -67,7 +74,7 @@
                             <v-btn
                                     color="green darken-1"
                                     text
-                                    @click="message=false"
+                                    @click="setDialog(false)"
                             >
                                 Cerrar
                             </v-btn>
@@ -82,6 +89,7 @@
 <script>
     import {required, maxLength, minLength, sameAs} from 'vuelidate/lib/validators';
     import {mapActions, mapState, mapMutations} from 'vuex'
+    import router from '@/router'
     export default {
         name: "IniciarSesion",
         data(){
@@ -89,7 +97,6 @@
                 usuario: '',
                 password: '',
                 password2: '',
-                message: this.dialog,
                 nameRules: [
                     v => !!v || 'Usuario requerido',
                     v => (v && v.length <= 10) || 'Usuario maximo 10 caracteres',
@@ -101,7 +108,7 @@
             }
         },
         computed:{
-          ...mapState(['mensaje', 'dialog'])
+          ...mapState(['mensaje', 'mensaje2', 'dialog'])
         },
         validations:{
           usuario:{required, maxLength:maxLength(10)},
@@ -113,7 +120,10 @@
                 this.mensaje="Sesion Iniciada"
             },
             ...mapActions(['registrarUsuario']),
-            ...mapMutations(['setDialog'])
+            ...mapMutations(['setDialog']),
+            iniciarSesion(){
+                router.push({name: 'IniciarSesion'})
+            }
         },
     }
 </script>

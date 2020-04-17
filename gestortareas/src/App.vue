@@ -25,12 +25,6 @@
       <v-btn text v-if="usuario && usuario.usuarioID !== null">
         <span class="mr-2" @click="cerrarSesion">Cerrar Sesion</span>
       </v-btn>
-      <v-btn text v-if="(!usuario || usuario.usuarioID === null) && !registro">
-        <span class="mr-2" @click="crearCuenta">Crear cuenta</span>
-      </v-btn>
-      <v-btn text v-if="(!usuario || usuario.usuarioID === null) && registro">
-        <span class="mr-2" @click="iniciarSesion">Iniciar Sesion</span>
-      </v-btn>
     </v-app-bar>
 
     <v-content id="content">
@@ -41,24 +35,11 @@
 
 <script>
 import {mapState, mapActions} from 'vuex'
-import router from '@/router'
+
 export default {
   name: 'App',
-  data(){
-    return{
-      registro: false
-    }
-  },
   methods:{
-    iniciarSesion(){
-      this.registro = false
-      router.push({name: 'IniciarSesion'})
-    },
-    crearCuenta(){
-      this.registro = true
-      router.push({name: 'Registro'})
-    },
-    ...mapActions(['cerrarSesion'])
+    ...mapActions(['cerrarSesion']),
   },
   computed:{
     ...mapState(['usuario'])

@@ -13,7 +13,7 @@ export default new Vuex.Store({
       tipo: localStorage.getItem('tipo') || null
     },
     mensaje:'',
-    dialog: false
+    dialog: false,
   },
   mutations: {
     setUsuario(state, payload) {
@@ -24,6 +24,9 @@ export default new Vuex.Store({
     },
     setMensaje(state, payload){
       state.mensaje = payload
+    },
+    setMensaje2(state, payload){
+      state.mensaje2 = payload
     },
     setDialog(state, payload){
       state.dialog = payload
@@ -66,11 +69,12 @@ export default new Vuex.Store({
               localStorage.setItem('tipo', data.tipo)
               commit('setUsuario', data)
               commit('setMensaje', false)
-              commit('setDialog', true)
+              commit('setDialog', false)
               router.push({name: 'Home'})
             }else{ //Si no esta logeado
               commit('setDialog', true)
               commit('setMensaje', decoded.mensaje)
+              commit('setMensaje2', "Upss.. Algo no va bien")
             }
           } else { //Datos erroneos
             console.log("PROBLEMA CON JWT")
@@ -91,9 +95,59 @@ export default new Vuex.Store({
       commit('borrarUsuario')
       router.push({name: 'IniciarSesion'})
     },
-    registrarUsuario({commit}, payload){
+    async registrarUsuario({commit}, payload){
       console.log("Registro")
       console.log(payload)
+      let jws = KJUR.jws.JWS; //Objeto para tratar JWT
+      let secret = "Alvaro1234@asdfgh"; // Clave privada
+
+      //crear JWT
+      let header = {alg: "HS256", typ: "JWT"}; //Cabecera de JWT
+      let data = {usuario: payload.usuario, password: payload.password, func: 'signIn'}; //Datos de JWT
+      let jwt = jws.sign("HS256", header, data, {utf8: secret}); //Firma de JWT
+
+      let formd = new FormData();
+      formd.append("jwt", jwt)
+
+      let response = await axios.post('http://localhost:80/servidor/api.php', formd)
+      let datos = response.data
+      console.log(jwt)
+      console.log(datos)
+
+      if (datos.status){
+        //verify JWT
+        console.log("Comprobar JWT")
+        let token = datos.token;
+        let isValid = jws.verifyJWT(token, {utf8: secret}, {alg: ["HS256"]})
+
+        if(isValid){
+          console.log(isValid)
+          let decoded = decode(token)
+          console.log("JWT devuelto")
+          console.log(decoded)
+          if (decoded.status){
+            if (decoded.signIn){
+              console.log("registrado")
+              commit('setDialog', true)
+              commit('setMensaje', "Usuario registrado correctamente")
+              commit('setMensaje2', "PREMIO!! HAS TENIDO SUERTE")
+              router.push({name: 'IniciarSesion'})
+            }else{
+              console.log("no registrado")
+              commit('setMensaje', "Usuario ya registrado, pruebe otro usuario")
+              commit('setMensaje2', "Upss.. Algo no va bien")
+              commit('setDialog', true)
+            }
+          }else{
+            console.log("Ha surguido un problema")
+          }
+        }else{
+          console.log("datos no fiables")
+        }
+
+      }else{
+
+      }
     }
   },
   modules: {
