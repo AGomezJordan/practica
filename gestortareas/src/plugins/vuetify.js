@@ -9,7 +9,7 @@ export default new Vuetify({
       locales: { es },
       current: 'es',
     },
-  icons: {
-    iconfont: 'fa',
-  },
+    icons: {
+        iconfont: 'fa', // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
+    },
 });

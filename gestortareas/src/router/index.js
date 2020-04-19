@@ -19,6 +19,18 @@ Vue.use(VueRouter)
       path: '/registro',
       name: 'Registro',
       component: () => import('../views/Registro.vue')
+    },
+    {
+      path: '/tarea/:id',
+      name: 'Tarea',
+      component: () => import('../views/Tarea.vue'),
+      meta: {requiresAuth: true}
+    },
+    {
+      path: '/add',
+      name: 'Add',
+      component: () => import('../views/Add.vue'),
+      meta: {requiresAuth: true}
     }
 ]
 

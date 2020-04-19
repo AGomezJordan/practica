@@ -12,7 +12,10 @@ export default new Vuex.Store({
       usuarioID: localStorage.getItem('usuarioID') || null,
       tipo: localStorage.getItem('tipo') || null
     },
+    tareas: [],
+    tarea: [],
     mensaje:'',
+    mensaje2: '',
     dialog: false,
   },
   mutations: {
@@ -69,6 +72,7 @@ export default new Vuex.Store({
               localStorage.setItem('tipo', data.tipo)
               commit('setUsuario', data)
               commit('setMensaje', false)
+              commit('setMensaje2', false)
               commit('setDialog', false)
               router.push({name: 'Home'})
             }else{ //Si no esta logeado
@@ -130,7 +134,7 @@ export default new Vuex.Store({
               console.log("registrado")
               commit('setDialog', true)
               commit('setMensaje', "Usuario registrado correctamente")
-              commit('setMensaje2', "PREMIO!! HAS TENIDO SUERTE")
+              commit('setMensaje2', "GENIAL!!")
               router.push({name: 'IniciarSesion'})
             }else{
               console.log("no registrado")
