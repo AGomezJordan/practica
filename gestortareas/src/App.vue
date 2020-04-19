@@ -25,28 +25,13 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn text v-if="usuario && usuario.usuarioID !== null">
-        <span class="mr-2" @click="cerrarSesion">Cerrar Sesion</span>
+      <v-btn @click="cerrarSesion" text v-if="usuario && usuario.usuarioID !== null">
+        Cerrar Sesion
       </v-btn>
 
-      <v-menu
-              left
-              bottom
-      >
-        <template v-slot:activator="{ on }">
-          <v-btn icon v-on="on" >
-            <span class="display-1">+</span>
-          </v-btn>
-        </template>
-
-        <v-list>
-          <v-list-item
-                  @click="add()"
-          >
-            <v-list-item-title>Añadir nota</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+      <v-btn class="display-1" @click="add" text v-if="usuario && usuario.usuarioID !== null">
+        +
+      </v-btn>
     </v-app-bar>
 
     <v-content id="content">
