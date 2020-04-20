@@ -152,6 +152,58 @@ export default new Vuex.Store({
       }else{
 
       }
+    },
+    async addNota({commit, state}, payload){
+      let jws = KJUR.jws.JWS; //Objeto para tratar JWT
+      let secret = "Alvaro1234@asdfgh"; // Clave privada
+
+      //crear JWT
+      let header = {alg: "HS256", typ: "JWT"}; //Cabecera de JWT
+      let data = {
+        func: 'addNota',
+        titulo: payload.titulo,
+        subtitulo: payload.subtitulo,
+        articulo: payload.articulo,
+        usuarioID: state.usuario.usuarioID
+      }; //Datos de JWT
+      let jwt = jws.sign("HS256", header, data, {utf8: secret}); //Firma de JWT
+
+      let formd = new FormData();
+      formd.append("jwt", jwt)
+
+      let response = await axios.post('http://localhost:80/servidor/api.php', formd)
+      let datos = response.data
+
+      if(datos.status){
+        //verify JWT
+        let token = datos.token;
+        let isValid = jws.verifyJWT(token, {utf8: secret}, {alg: ["HS256"]})
+
+        if(isValid) {
+          let decoded = decode(token)
+          if(decoded.status){
+            if(decoded.insert){
+              console.log("insertado")
+              commit('setDialog', true)
+              commit('setMensaje', "Tarea añadida con exito!")
+              commit('setMensaje2', "GENIAL!!")
+              router.push({name: 'Home'})
+            }else{
+              console.log("no insertado")
+              commit('setMensaje', "No se ha podido añadir la tarea. Vuelva a intentarlo")
+              commit('setMensaje2', "Upss.. Lo sentimos :(")
+              commit('setDialog', true)
+            }
+          }else{
+            console.log("Ha ocurrido un problema")
+          }
+        }else{
+          console.log("Datos posiblemente corruptos")
+        }
+      }else{
+        console.log("Ha ocurrido un problema")
+      }
+
     }
   },
   modules: {

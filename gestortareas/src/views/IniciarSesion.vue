@@ -46,42 +46,19 @@
                 </v-card-text>
             </v-card>
             </div>
-            <v-row justify="center">
-                <v-dialog
-                        v-model="dialog"
-                        max-width="290"
-                >
-                    <v-card>
-                        <v-card-title class="headline display-3">{{mensaje2}}</v-card-title>
-
-                        <v-card-text>
-                            {{mensaje}}
-                        </v-card-text>
-
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
-
-                            <v-btn
-                                    color="green darken-1"
-                                    text
-                                    @click="setDialog(false)"
-                            >
-                                Cerrar
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-dialog>
-            </v-row>
+            <Mensaje></Mensaje>
         </v-container>
     </div>
 </template>
 
 <script>
     import {required, maxLength, minLength} from 'vuelidate/lib/validators';
-    import {mapActions, mapState, mapMutations} from 'vuex'
+    import {mapActions} from 'vuex'
     import router from '@/router'
+    import Mensaje from "../components/Mensaje";
     export default {
         name: "IniciarSesion",
+        components: {Mensaje},
         data(){
             return{
                 usuario: '',
@@ -96,16 +73,12 @@
             ]
             }
         },
-        computed:{
-          ...mapState(['mensaje', 'mensaje2', 'dialog'])
-        },
         validations:{
           usuario:{required, maxLength:maxLength(10)},
           password: {required, minLength:minLength(8)},
         },
         methods:{
             ...mapActions(['iniciarSesion']),
-            ...mapMutations(['setDialog']),
             crearCuenta(){
                 router.push({name: 'Registro'})
             }

@@ -29,14 +29,17 @@
           </div>
         </v-col>
       </v-row>
+      <Mensaje></Mensaje>
     </v-container>
   </div>
 </template>
 
 <script>
 import router from '@/router'
+import Mensaje from "../components/Mensaje";
 export default {
   name: 'Home',
+  components: {Mensaje},
   methods:{
     edit(n){
       router.push({name: 'Tarea', params: {id: 'EditarTarea'+n}})
