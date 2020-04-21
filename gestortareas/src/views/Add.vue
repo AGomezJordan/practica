@@ -6,7 +6,8 @@
             <v-form @submit.prevent="addNota({
                 titulo: $v.titulo.$model,
                 subtitulo: $v.subtitulo.$model,
-                articulo: $v.articulo.$model
+                articulo: $v.articulo.$model,
+                foto: foto
                 })">
                 <v-card-text>
                     <v-text-field
@@ -31,6 +32,13 @@
                             counter
                             v-model="$v.articulo.$model"
                     ></v-textarea>
+                    <v-file-input
+                            v-model="foto"
+                            placeholder="Elige la foto de portada"
+                            label="File input"
+                            accept="image/jpeg"
+                    >
+                    </v-file-input>
                 </v-card-text>
                 <v-card-text class="text-center">
                     <v-btn type="submit" class="ma-3 success" :disabled="$v.$invalid">AÑADIR</v-btn>

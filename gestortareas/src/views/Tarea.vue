@@ -1,63 +1,18 @@
 <template>
     <div>
         <v-container>
-            <v-card class="pa-5 text-justify tarjeta">
-                <v-card-text><v-img src="https://picsum.photos/510/300?random" aspect-ratio="2"></v-img></v-card-text>
-                <v-card-title class="titulo">TITULO DE LA NOTA</v-card-title>
+            <v-card class="pa-8 text-justify tarjeta">
+                <v-card-text><v-img :src="tarea.foto" aspect-ratio="2"></v-img></v-card-text>
+                <v-card-title class="titulo">{{tarea.titulo}}</v-card-title>
                 <v-card-subtitle class="subtitulo mt-1 black--text">
-                    akldsjfkal dsfkalsd jfklasdj flkasdjf lkasdjf klasdjf klasdjf asdfasd f
-                    a sdfasdf asdklñf jasdklf jaksldfj aklsdñf alsñdkf aklsñdf aslkdf jasd f
+                    {{tarea.subtitulo}}
                 </v-card-subtitle>
                 <v-card-text class="articulo mt-2">
-                    akldsjfkal dsfkalsd jfklasdj flkasdjf lkasdjf klasdjf klasdjf asdfasd f
-                    a sdfasdf asdklñf jasdklf jaksldfj aklsdñf alsñdkf aklsñdf aslkdf jasd f
-                    akdñs fjaklsdjflkasd jfklasdj fklasdj fklasdj fklasdj fkalsd jfasdfasdfadf
-                    asdkfjasd fklajsdklf asdklf jaksdlfj aksldjf aklsdfjaklsfd jaklsdf jasdf
-                    da jfskla jsdfkasdfasdf asdf asdfa sdfas dfasd fasdf adlj asdkfl jasdfkl
-                    akldsjfkal dsfkalsd jfklasdj flkasdjf lkasdjf klasdjf klasdjf asdfasd f
-                    a sdfasdf asdklñf jasdklf jaksldfj aklsdñf alsñdkf aklsñdf aslkdf jasd f
-                    akdñs fjaklsdjflkasd jfklasdj fklasdj fklasdj fklasdj fkalsd jfasdfasdfadf
-                    asdkfjasd fklajsdklf asdklf jaksdlfj aksldjf aklsdfjaklsfd jaklsdf jasdf
-                    da jfskla jsdfkasdfasdf asdf asdfa sdfas dfasd fasdf adlj asdkfl jasdfkl
-                    akldsjfkal dsfkalsd jfklasdj flkasdjf lkasdjf klasdjf klasdjf asdfasd f
-                    a sdfasdf asdklñf jasdklf jaksldfj aklsdñf alsñdkf aklsñdf aslkdf jasd f
-                    akdñs fjaklsdjflkasd jfklasdj fklasdj fklasdj fklasdj fkalsd jfasdfasdfadf
-                    asdkfjasd fklajsdklf asdklf jaksdlfj aksldjf aklsdfjaklsfd jaklsdf jasdf
-                    da jfskla jsdfkasdfasdf asdf asdfa sdfas dfasd fasdf adlj asdkfl jasdfkl
-                    akldsjfkal dsfkalsd jfklasdj flkasdjf lkasdjf klasdjf klasdjf asdfasd f
-                    a sdfasdf asdklñf jasdklf jaksldfj aklsdñf alsñdkf aklsñdf aslkdf jasd f
-                    akdñs fjaklsdjflkasd jfklasdj fklasdj fklasdj fklasdj fkalsd jfasdfasdfadf
-                    asdkfjasd fklajsdklf asdklf jaksdlfj aksldjf aklsdfjaklsfd jaklsdf jasdf
-                    da jfskla jsdfkasdfasdf asdf asdfa sdfas dfasd fasdf adlj asdkfl jasdfkl
-                    akldsjfkal dsfkalsd jfklasdj flkasdjf lkasdjf klasdjf klasdjf asdfasd f
-                    a sdfasdf asdklñf jasdklf jaksldfj aklsdñf alsñdkf aklsñdf aslkdf jasd f
-                    akdñs fjaklsdjflkasd jfklasdj fklasdj fklasdj fklasdj fkalsd jfasdfasdfadf
-                    asdkfjasd fklajsdklf asdklf jaksdlfj aksldjf aklsdfjaklsfd jaklsdf jasdf
-                    da jfskla jsdfkasdfasdf asdf asdfa sdfas dfasd fasdf adlj asdkfl jasdfkl
-                    akldsjfkal dsfkalsd jfklasdj flkasdjf lkasdjf klasdjf klasdjf asdfasd f
-                    a sdfasdf asdklñf jasdklf jaksldfj aklsdñf alsñdkf aklsñdf aslkdf jasd f
-                    akdñs fjaklsdjflkasd jfklasdj fklasdj fklasdj fklasdj fkalsd jfasdfasdfadf
-                    asdkfjasd fklajsdklf asdklf jaksdlfj aksldjf aklsdfjaklsfd jaklsdf jasdf
-                    da jfskla jsdfkasdfasdf asdf asdfa sdfas dfasd fasdf adlj asdkfl jasdfkl
-                    akldsjfkal dsfkalsd jfklasdj flkasdjf lkasdjf klasdjf klasdjf asdfasd f
-                    a sdfasdf asdklñf jasdklf jaksldfj aklsdñf alsñdkf aklsñdf aslkdf jasd f
-                    akdñs fjaklsdjflkasd jfklasdj fklasdj fklasdj fklasdj fkalsd jfasdfasdfadf
-                    asdkfjasd fklajsdklf asdklf jaksdlfj aksldjf aklsdfjaklsfd jaklsdf jasdf
-                    da jfskla jsdfkasdfasdf asdf asdfa sdfas dfasd fasdf adlj asdkfl jasdfkl
-                    akldsjfkal dsfkalsd jfklasdj flkasdjf lkasdjf klasdjf klasdjf asdfasd f
-                    a sdfasdf asdklñf jasdklf jaksldfj aklsdñf alsñdkf aklsñdf aslkdf jasd f
-                    akdñs fjaklsdjflkasd jfklasdj fklasdj fklasdj fklasdj fkalsd jfasdfasdfadf
-                    asdkfjasd fklajsdklf asdklf jaksdlfj aksldjf aklsdfjaklsfd jaklsdf jasdf
-                    da jfskla jsdfkasdfasdf asdf asdfa sdfas dfasd fasdf adlj asdkfl jasdfkl
-                    akldsjfkal dsfkalsd jfklasdj flkasdjf lkasdjf klasdjf klasdjf asdfasd f
-                    a sdfasdf asdklñf jasdklf jaksldfj aklsdñf alsñdkf aklsñdf aslkdf jasd f
-                    akdñs fjaklsdjflkasd jfklasdj fklasdj fklasdj fklasdj fkalsd jfasdfasdfadf
-                    asdkfjasd fklajsdklf asdklf jaksdlfj aksldjf aklsdfjaklsfd jaklsdf jasdf
-                    da jfskla jsdfkasdfasdf asdf asdfa sdfas dfasd fasdf adlj asdkfl jasdfkl
+                    {{tarea.articulo}}
                 </v-card-text>
                 <v-card-subtitle>
-                    Escrito por: Pedro Gonzalez Calvo<br>
-                    Fecha: 02-02-2020
+                    Escrito por: {{tarea.usuario}}<br>
+                    Fecha: {{tarea.fecha}}
 
                 </v-card-subtitle>
             </v-card>
@@ -66,12 +21,22 @@
 </template>
 
 <script>
+    import {mapActions, mapState} from 'vuex'
     export default {
         name: "Tarea",
         data(){
             return{
                 id: this.$route.params.id
             }
+        },
+        created() {
+            this.getTarea(this.$route.params.id)
+        },
+        methods:{
+            ...mapActions(['getTarea'])
+        },
+        computed:{
+          ...mapState(['tarea'])
         }
     }
 </script>
