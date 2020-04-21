@@ -4,6 +4,17 @@
         <h3>Cargando tus tareas :)</h3>
         <square-loader color="purple"></square-loader>
     </v-container>
+    <v-container v-if="!tareas || !tareas[0]">
+      <v-card>
+        <v-card-text>
+          <h1>SIN TAREAS</h1>
+          <h3>
+            No tienes ninguna tarea. Porque no te animas a crear una
+            <router-link to="/add">pulsando aquí</router-link> :)
+          </h3>
+        </v-card-text>
+      </v-card>
+    </v-container>
     <v-container v-if="tareas && !cargando">
       <v-row>
         <v-col lg="4" md="6" cols="12" v-for="tarea of tareas">
@@ -104,7 +115,7 @@ export default {
       this.temporalID = ''
     },
     edit(n){
-      router.push({name: 'Tarea', params: {id: 'EditarTarea'+n}})
+      router.push({name: 'Edit', params: {id: n}})
     },
     ...mapActions(['getTareas', 'borrarTarea']),
   },

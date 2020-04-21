@@ -31,6 +31,12 @@ Vue.use(VueRouter)
       name: 'Add',
       component: () => import('../views/Add.vue'),
       meta: {requiresAuth: true}
+    },
+    {
+      path: '/EditarTarea/:id',
+      name: 'Edit',
+      component: () => import('../views/Edit.vue'),
+      meta: {requiresAuth: true}
     }
 ]
 

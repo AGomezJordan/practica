@@ -214,6 +214,7 @@ export default new Vuex.Store({
     },
     async getTareas({commit, state}){
       commit('setCargando', true);
+      try{
       let jws = KJUR.jws.JWS; //Objeto para tratar JWT
       let secret = "Alvaro1234@asdfgh"; // Clave privada
 
@@ -256,6 +257,10 @@ export default new Vuex.Store({
         }
       }
         commit('setCargando' , false)
+      }catch (e) {
+        commit('setCargando' , false)
+        commit('setTareas', null)
+      }
     },
     async getTarea({commit}, payload){
       commit('setCargando', true);
@@ -349,6 +354,10 @@ export default new Vuex.Store({
           commit('setMensaje2', "Upss.. Algo no va bien")
         }
       }
+    },
+    async editarNota({commit}, payload){
+      console.log("Editar")
+      console.log(payload)
     }
   },
   modules: {

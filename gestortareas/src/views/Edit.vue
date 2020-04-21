@@ -2,11 +2,11 @@
     <v-container>
         <div class="tarjeta">
         <v-card>
-            <v-card-text class="display-2 text-center white--text py-2" id="titulo">AÑADIR NOTA</v-card-text>
+            <v-card-text class="display-2 text-center white--text py-2" id="titulo">EDITAR TAREA</v-card-text>
             <v-form @submit.prevent="editarNota({
-                titulo: $v.titulo.$model,
-                subtitulo: $v.subtitulo.$model,
-                articulo: $v.articulo.$model,
+                titulo: $v.tarea.titulo.$model,
+                subtitulo: $v.tarea.subtitulo.$model,
+                articulo: $v.tarea.articulo.$model,
                 foto: foto
                 })">
                 <v-card-text>
@@ -14,14 +14,14 @@
                         counter
                         label="Titulo"
                         required
-                        v-model="$v.titulo.$model"
+                        v-model="$v.tarea.titulo.$model"
                         :rules="tituloRules"
                     ></v-text-field>
                     <v-text-field
                             counter
                             label="Subtitulo"
                             required
-                            v-model="$v.subtitulo.$model"
+                            v-model="$v.tarea.subtitulo.$model"
                             :rules="subRules"
                     ></v-text-field>
                     <v-textarea
@@ -30,7 +30,7 @@
                             label="Articulo"
                             rows="1"
                             counter
-                            v-model="$v.articulo.$model"
+                            v-model="$v.tarea.articulo.$model"
                     ></v-textarea>
                     <v-file-input
                             v-model="foto"
@@ -40,7 +40,7 @@
                     </v-file-input>
                 </v-card-text>
                 <v-card-text class="text-center">
-                    <v-btn type="submit" class="ma-3 success" :disabled="$v.$invalid">AÑADIR</v-btn>
+                    <v-btn type="submit" class="ma-3 success" :disabled="$v.$invalid">EDITAR</v-btn>
                     <v-btn type="reset" class="ma-3 red white--text">REINICIAR</v-btn>
                 </v-card-text>
             </v-form>
@@ -52,7 +52,7 @@
 
 <script>
     import {required, maxLength} from 'vuelidate/lib/validators';
-    import {mapActions} from 'vuex'
+    import {mapActions, mapState} from 'vuex'
     import Mensaje from "../components/Mensaje";
 
     export default {
@@ -60,9 +60,6 @@
         components: {Mensaje},
         data(){
           return{
-              titulo: '',
-              subtitulo: '',
-              articulo: '',
               foto: null,
               tituloRules: [
                   v => !!v || 'Titulo Requerido',
@@ -78,13 +75,21 @@
               ],
           }
         },
+        created() {
+            this.getTarea(this.$route.params.id)
+        },
         methods:{
-            ...mapActions(['editarNota']),
+            ...mapActions(['editarNota', 'getTarea']),
+        },
+        computed:{
+            ...mapState(['tarea'])
         },
         validations:{
-            titulo:{required, maxLength:maxLength(255)},
-            subtitulo: {required, maxLength:maxLength(255)},
-            articulo: {required, maxLength:maxLength(65535)}
+            tarea: {
+                titulo: {required, maxLength: maxLength(255)},
+                subtitulo: {required, maxLength: maxLength(255)},
+                articulo: {required, maxLength: maxLength(65535)}
+            }
         }
     }
 </script>
