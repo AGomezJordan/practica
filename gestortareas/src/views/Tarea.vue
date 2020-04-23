@@ -1,6 +1,18 @@
 <template>
     <div>
-        <v-container>
+        <v-container v-if="!tarea.titulo">
+            <v-card>
+                <v-card-text>
+                    <h1>HA OCURRIDO UN PROBLEMA...</h1>
+                    <h3>
+                        Ha ocurrido un problema. Quizas estes accediendo a un recurso
+                        el cual no es de tu propiedad. Vuelva a inicio
+                        <router-link to="/">pulsando aquí</router-link>
+                    </h3>
+                </v-card-text>
+            </v-card>
+        </v-container>
+        <v-container v-if="tarea.titulo">
             <v-card class="pa-8 text-justify tarjeta">
                 <v-card-text><v-img :src="tarea.foto" aspect-ratio="2"></v-img></v-card-text>
                 <v-card-title class="titulo">{{tarea.titulo}}</v-card-title>

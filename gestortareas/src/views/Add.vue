@@ -3,7 +3,7 @@
         <div class="tarjeta">
         <v-card>
             <v-card-text class="display-2 text-center white--text py-2" id="titulo">AÑADIR NOTA</v-card-text>
-            <v-form @submit.prevent="editarNota({
+            <v-form @submit.prevent="addNota({
                 titulo: $v.titulo.$model,
                 subtitulo: $v.subtitulo.$model,
                 articulo: $v.articulo.$model,
@@ -33,14 +33,16 @@
                             v-model="$v.articulo.$model"
                     ></v-textarea>
                     <v-file-input
+                            @change="validateFoto()"
                             v-model="foto"
                             label="Foto"
                             accept="image/jpeg"
+                            :rules="fotoRules"
                     >
                     </v-file-input>
                 </v-card-text>
                 <v-card-text class="text-center">
-                    <v-btn type="submit" class="ma-3 success" :disabled="$v.$invalid">AÑADIR</v-btn>
+                    <v-btn type="submit" class="ma-3 success" v-if="!$v.$invalid && (valido || foto==null) ">AÑADIR</v-btn>
                     <v-btn type="reset" class="ma-3 red white--text">REINICIAR</v-btn>
                 </v-card-text>
             </v-form>
@@ -60,6 +62,7 @@
         components: {Mensaje},
         data(){
           return{
+              valido: true,
               titulo: '',
               subtitulo: '',
               articulo: '',
@@ -76,10 +79,22 @@
                   v => !!v || 'Articulo Requerido',
                   v => (v && v.length <= 65535) || 'Articulo maximo 65 535 caracteres',
               ],
+              fotoRules: [
+                v => (v && v.size <7000000) || 'Foto demasiado grande. Max 7 MB',
+              ]
           }
         },
         methods:{
-            ...mapActions(['editarNota']),
+            ...mapActions(['addNota']),
+            validateFoto(){
+                if (this.foto.size > 7000000){
+                    console.log("invalido")
+                    this.valido = false
+                }else{
+                    console.log("valido")
+                    this.valido = true
+                }
+            }
         },
         validations:{
             titulo:{required, maxLength:maxLength(255)},

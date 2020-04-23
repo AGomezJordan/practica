@@ -7,7 +7,8 @@
                 titulo: $v.tarea.titulo.$model,
                 subtitulo: $v.tarea.subtitulo.$model,
                 articulo: $v.tarea.articulo.$model,
-                foto: foto
+                foto: foto,
+                id: id
                 })">
                 <v-card-text>
                     <v-text-field
@@ -33,14 +34,16 @@
                             v-model="$v.tarea.articulo.$model"
                     ></v-textarea>
                     <v-file-input
+                            @change="validateFoto()"
                             v-model="foto"
                             label="Foto"
                             accept="image/jpeg"
+                            :rules="fotoRules"
                     >
                     </v-file-input>
                 </v-card-text>
                 <v-card-text class="text-center">
-                    <v-btn type="submit" class="ma-3 success" :disabled="$v.$invalid">EDITAR</v-btn>
+                    <v-btn type="submit" class="ma-3 success" v-if="!$v.$invalid && (valido || foto==null)">EDITAR</v-btn>
                     <v-btn type="reset" class="ma-3 red white--text">REINICIAR</v-btn>
                 </v-card-text>
             </v-form>
@@ -60,6 +63,8 @@
         components: {Mensaje},
         data(){
           return{
+              valido: true,
+              id: this.$route.params.id,
               foto: null,
               tituloRules: [
                   v => !!v || 'Titulo Requerido',
@@ -73,6 +78,9 @@
                   v => !!v || 'Articulo Requerido',
                   v => (v && v.length <= 65535) || 'Articulo maximo 65 535 caracteres',
               ],
+              fotoRules: [
+                  v => (v && v.size <7000000) || 'Foto demasiado grande. Max 7 MB',
+              ]
           }
         },
         created() {
@@ -80,6 +88,15 @@
         },
         methods:{
             ...mapActions(['editarNota', 'getTarea']),
+            validateFoto(){
+                if (this.foto.size > 7000000){
+                    console.log("invalido")
+                    this.valido = false
+                }else{
+                    console.log("valido")
+                    this.valido = true
+                }
+            }
         },
         computed:{
             ...mapState(['tarea'])

@@ -271,7 +271,8 @@ export default new Vuex.Store({
       let header = {alg: "HS256", typ: "JWT"}; //Cabecera de JWT
       let data = {
         func: 'getTarea',
-        tarea: payload
+        tarea: payload,
+        usuarioID: localStorage.getItem('usuarioID')
       }; //Datos de JWT
       let jwt = jws.sign("HS256", header, data, {utf8: secret}); //Firma de JWT
 
@@ -316,7 +317,8 @@ export default new Vuex.Store({
       let header = {alg: "HS256", typ: "JWT"}; //Cabecera de JWT
       let data = {
         func: 'borrarTarea',
-        tarea: payload
+        tarea: payload,
+        usuarioID: localStorage.getItem('usuarioID')
       }; //Datos de JWT
       let jwt = jws.sign("HS256", header, data, {utf8: secret}); //Firma de JWT
 
@@ -356,8 +358,59 @@ export default new Vuex.Store({
       }
     },
     async editarNota({commit}, payload){
-      console.log("Editar")
-      console.log(payload)
+      //commit('setCargando', true);
+      let jws = KJUR.jws.JWS; //Objeto para tratar JWT
+      let secret = "Alvaro1234@asdfgh"; // Clave privada
+
+      //crear JWT
+      let header = {alg: "HS256", typ: "JWT"}; //Cabecera de JWT
+      let data = {
+        func: 'editTarea',
+        tarea: payload.id,
+        titulo: payload.titulo,
+        subtitulo: payload.subtitulo,
+        articulo: payload.articulo,
+        usuarioID: localStorage.getItem('usuarioID')
+
+      }; //Datos de JWT
+      let jwt = jws.sign("HS256", header, data, {utf8: secret}); //Firma de JWT
+
+      let formd = new FormData();
+      formd.append("jwt", jwt)
+      formd.append('foto', payload.foto)
+      let response = await axios.post('http://localhost:80/servidor/api.php', formd)
+      let datos = response.data
+
+      if(datos.status){
+        //verify JWT
+        let token = datos.token;
+        let isValid = jws.verifyJWT(token, {utf8: secret}, {alg: ["HS256"]})
+
+        if(isValid) {
+          let decoded = decode(token)
+          if(decoded.status){
+            if(decoded.edit){
+              router.push({name: 'Home'})
+            }else{
+              commit('setMensaje', "No se ha podido editar la tarea. Vuelva a intentarlo")
+              commit('setMensaje2', "Upss.. Lo sentimos :(")
+              commit('setDialog', true)
+            }
+          }else{
+            commit('setDialog', true)
+            commit('setMensaje', "Datos erroneos")
+            commit('setMensaje2', "Upss.. Algo no va bien")
+          }
+        }else{
+          commit('setDialog', true)
+          commit('setMensaje', "Datos erroneos")
+          commit('setMensaje2', "Upss.. Algo no va bien")
+        }
+      }else{
+        commit('setDialog', true)
+        commit('setMensaje', "Ha ocurrido un problema vuelva a intentarlo")
+        commit('setMensaje2', "Upss.. Algo no va bien")
+      }
     }
   },
   modules: {
