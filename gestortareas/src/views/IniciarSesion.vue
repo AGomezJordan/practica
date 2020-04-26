@@ -27,14 +27,14 @@
                                 required
                         ></v-text-field>
 
-                        <button
+                        <v-btn
                                 v-if="!$v.$invalid"
                                 color="success"
                                 class="mr-4"
                                 type="submit"
                         >
                             INICIAR SESION
-                        </button>
+                        </v-btn>
                         <v-btn
                                 color="primary"
                                 class="mr-4"

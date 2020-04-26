@@ -58,7 +58,7 @@ export default new Vuex.Store({
       let formd = new FormData();
       formd.append("jwt", jwt)
 
-      let response = await axios.post('http://localhost:80/servidor/api.php', formd)
+      let response = await axios.post('http://localhost/servidor/api.php', formd)
       let datos = response.data
 
       if (datos.status) {
@@ -120,7 +120,7 @@ export default new Vuex.Store({
       let formd = new FormData();
       formd.append("jwt", jwt)
 
-      let response = await axios.post('http://localhost:80/servidor/api.php', formd)
+      let response = await axios.post('http://localhost/servidor/api.php', formd)
       let datos = response.data
 
       if (datos.status){
@@ -177,7 +177,7 @@ export default new Vuex.Store({
       formd.append("jwt", jwt)
       formd.append("foto", payload.foto)
 
-      let response = await axios.post('http://localhost:80/servidor/api.php', formd)
+      let response = await axios.post('http://localhost/servidor/api.php', formd)
       let datos = response.data
 
       if(datos.status){
@@ -228,7 +228,7 @@ export default new Vuex.Store({
 
       let formd = new FormData();
       formd.append("jwt", jwt)
-      let response = await axios.post('http://localhost:80/servidor/api.php', formd)
+      let response = await axios.post('http://localhost/servidor/api.php', formd)
       let datos = response.data
       if (datos.status) {
         //verify JWT
@@ -278,7 +278,7 @@ export default new Vuex.Store({
 
       let formd = new FormData();
       formd.append("jwt", jwt)
-      let response = await axios.post('http://localhost:80/servidor/api.php', formd)
+      let response = await axios.post('http://localhost/servidor/api.php', formd)
       let datos = response.data
       if (datos.status) {
         //verify JWT
@@ -324,7 +324,7 @@ export default new Vuex.Store({
 
       let formd = new FormData();
       formd.append("jwt", jwt)
-      let response = await axios.post('http://localhost:80/servidor/api.php', formd)
+      let response = await axios.post('http://localhost/servidor/api.php', formd)
       let datos = response.data
 
       if (datos.status) {
@@ -378,7 +378,7 @@ export default new Vuex.Store({
       let formd = new FormData();
       formd.append("jwt", jwt)
       formd.append('foto', payload.foto)
-      let response = await axios.post('http://localhost:80/servidor/api.php', formd)
+      let response = await axios.post('http://localhost/servidor/api.php', formd)
       let datos = response.data
 
       if(datos.status){
