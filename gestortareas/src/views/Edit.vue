@@ -1,5 +1,10 @@
 <template>
-    <v-container>
+    <div>
+        <v-container v-if="cargando" class="display-1 text-center">
+            <h3>Cargando...</h3>
+            <square-loader color="purple"></square-loader>
+        </v-container>
+    <v-container v-if="!cargando">
         <div class="tarjeta">
         <v-card>
             <v-card-text class="display-2 text-center white--text py-2" id="titulo">EDITAR TAREA</v-card-text>
@@ -43,7 +48,7 @@
                     </v-file-input>
                 </v-card-text>
                 <v-card-text class="text-center">
-                    <v-btn type="submit" class="ma-3 success" v-if="!$v.$invalid && (valido || foto==null)">EDITAR</v-btn>
+                    <v-btn type="submit" class="ma-3 success" v-if="!$v.$invalid &&  !cargando && (valido || foto==null)">EDITAR</v-btn>
                     <v-btn type="reset" class="ma-3 red white--text">REINICIAR</v-btn>
                 </v-card-text>
             </v-form>
@@ -51,16 +56,18 @@
         </div>
         <Mensaje></Mensaje>
     </v-container>
+    </div>
 </template>
 
 <script>
+    import SquareLoader from 'vue-spinner/src/SquareLoader'
     import {required, maxLength} from 'vuelidate/lib/validators';
     import {mapActions, mapState} from 'vuex'
     import Mensaje from "../components/Mensaje";
 
     export default {
         name: "Add",
-        components: {Mensaje},
+        components: {Mensaje, SquareLoader},
         data(){
           return{
               valido: true,
@@ -99,7 +106,7 @@
             }
         },
         computed:{
-            ...mapState(['tarea'])
+            ...mapState(['tarea', 'cargando'])
         },
         validations:{
             tarea: {

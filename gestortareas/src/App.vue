@@ -1,13 +1,48 @@
 <template>
   <v-app>
+    <v-navigation-drawer
+            v-model="drawer"
+            app
+            bottom
+            temporary
+            clipped
+            color="#f5f5f5"
+    >
+      <v-list
+              dense
+      >
+        <v-list-item-group
+                active-class="deep-purple--text text--accent-4"
+        >
+          <v-list-item v-if="usuario && usuario.usuarioID !== null">
+            <v-list-item-icon>
+              <v-icon>mdi-home</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title @click="cerrarSesion">
+              Cerrar Sesion
+            </v-list-item-title>
+          </v-list-item>
+
+          <v-list-item v-if="usuario && usuario.usuarioID !== null">
+            <v-list-item-icon>
+              <v-icon>mdi-home</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title @click="add">
+              Añadir Tarea
+            </v-list-item-title>
+          </v-list-item>
+
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
     <v-app-bar
-      hide-on-scroll
       id="menu"
       app
       color="alert"
       dark
       src="./assets/titulo.png"
     >
+      <v-app-bar-nav-icon @click="drawer = !drawer" v-if="usuario && usuario.usuarioID !== null">*</v-app-bar-nav-icon>
       <div class="d-flex align-center">
         <router-link to="/">
         <v-img
@@ -24,16 +59,7 @@
       </div>
 
       <v-spacer></v-spacer>
-
-      <v-btn @click="cerrarSesion" text v-if="usuario && usuario.usuarioID !== null">
-        Cerrar Sesion
-      </v-btn>
-
-      <v-btn class="display-1" @click="add" text v-if="usuario && usuario.usuarioID !== null">
-        +
-      </v-btn>
     </v-app-bar>
-
     <v-content id="content">
         <router-view></router-view>
     </v-content>
@@ -46,6 +72,11 @@ import router from '@/router'
 
 export default {
   name: 'App',
+  data(){
+    return{
+      drawer: false
+    }
+  },
   methods:{
     ...mapActions(['cerrarSesion']),
     add(){

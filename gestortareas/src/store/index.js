@@ -58,7 +58,7 @@ export default new Vuex.Store({
       let formd = new FormData();
       formd.append("jwt", jwt)
 
-      let response = await axios.post('http://localhost/servidor/api.php', formd)
+      let response = await axios.post('https://makreim.000webhostapp.com/servidor/api.php', formd)
       let datos = response.data
 
       if (datos.status) {
@@ -120,7 +120,7 @@ export default new Vuex.Store({
       let formd = new FormData();
       formd.append("jwt", jwt)
 
-      let response = await axios.post('http://localhost/servidor/api.php', formd)
+      let response = await axios.post('https://makreim.000webhostapp.com/servidor/api.php', formd)
       let datos = response.data
 
       if (datos.status){
@@ -159,6 +159,7 @@ export default new Vuex.Store({
       }
     },
     async addNota({commit, state}, payload){
+      commit('setCargando', true);
       let jws = KJUR.jws.JWS; //Objeto para tratar JWT
       let secret = "Alvaro1234@asdfgh"; // Clave privada
 
@@ -177,7 +178,7 @@ export default new Vuex.Store({
       formd.append("jwt", jwt)
       formd.append("foto", payload.foto)
 
-      let response = await axios.post('http://localhost/servidor/api.php', formd)
+      let response = await axios.post('https://makreim.000webhostapp.com/servidor/api.php', formd)
       let datos = response.data
 
       if(datos.status){
@@ -210,7 +211,7 @@ export default new Vuex.Store({
         commit('setMensaje', "Ha ocurrido un problema vuelva a intentarlo")
         commit('setMensaje2', "Upss.. Algo no va bien")
       }
-
+      commit('setCargando', false);
     },
     async getTareas({commit, state}){
       commit('setCargando', true);
@@ -228,7 +229,7 @@ export default new Vuex.Store({
 
       let formd = new FormData();
       formd.append("jwt", jwt)
-      let response = await axios.post('http://localhost/servidor/api.php', formd)
+      let response = await axios.post('https://makreim.000webhostapp.com/servidor/api.php', formd)
       let datos = response.data
       if (datos.status) {
         //verify JWT
@@ -278,7 +279,7 @@ export default new Vuex.Store({
 
       let formd = new FormData();
       formd.append("jwt", jwt)
-      let response = await axios.post('http://localhost/servidor/api.php', formd)
+      let response = await axios.post('https://makreim.000webhostapp.com/servidor/api.php', formd)
       let datos = response.data
       if (datos.status) {
         //verify JWT
@@ -324,7 +325,7 @@ export default new Vuex.Store({
 
       let formd = new FormData();
       formd.append("jwt", jwt)
-      let response = await axios.post('http://localhost/servidor/api.php', formd)
+      let response = await axios.post('https://makreim.000webhostapp.com/servidor/api.php', formd)
       let datos = response.data
 
       if (datos.status) {
@@ -358,7 +359,7 @@ export default new Vuex.Store({
       }
     },
     async editarNota({commit}, payload){
-      //commit('setCargando', true);
+      commit('setCargando', true);
       let jws = KJUR.jws.JWS; //Objeto para tratar JWT
       let secret = "Alvaro1234@asdfgh"; // Clave privada
 
@@ -378,7 +379,7 @@ export default new Vuex.Store({
       let formd = new FormData();
       formd.append("jwt", jwt)
       formd.append('foto', payload.foto)
-      let response = await axios.post('http://localhost/servidor/api.php', formd)
+      let response = await axios.post('https://makreim.000webhostapp.com/servidor/api.php', formd)
       let datos = response.data
 
       if(datos.status){
@@ -411,6 +412,7 @@ export default new Vuex.Store({
         commit('setMensaje', "Ha ocurrido un problema vuelva a intentarlo")
         commit('setMensaje2', "Upss.. Algo no va bien")
       }
+      commit('setCargando', false);
     }
   },
   modules: {
