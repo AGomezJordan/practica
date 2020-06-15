@@ -2,7 +2,11 @@ import Vue from 'vue';
 import Vuetify from 'vuetify/lib';
 import es from 'vuetify/es5/locale/es';
 
-Vue.use(Vuetify);
+Vue.use(Vuetify,{
+    theme:{
+        primary: '#ffffff'
+    },
+});
 
 export default new Vuetify({
     lang: {
