@@ -1,0 +1,87 @@
+html,body{
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 0;
+}
+/* fuentes */
+@font-face {
+    font-family: Titulo;
+    src: url("fonts/titulo.ttf");
+}
+@font-face {
+    font-family: Texto;
+    src: url("fonts/texto.ttf");
+}
+/* cabecera */
+.header{
+    box-shadow: 3px -4px 26px -4px rgba(0,0,0,0.51);
+}
+
+.titulo{
+    text-align: center;
+    font-size: 35px;
+    margin-left: 100px;
+    font-family: Titulo;
+    letter-spacing: 5px;
+    width: 100%;
+}
+.cabecera{
+    display: flex;
+    margin-left: 60px;
+}
+
+/* primer div donde se explica el ejercicio */
+.explicacion #foto, #texto{
+    text-align: center;
+}
+#foto img{
+    width: 100%;
+    height: 100%;
+}
+#textExp{
+    padding: 20px;
+    text-align: justify;
+    font-size: 25px;
+    margin-top: 20px;
+    letter-spacing: 5px;
+    line-height: 60px;
+    font-family: Texto;
+}
+#texto{
+    padding-top: 40px;
+}
+
+/* DIV DONDE SE IRA METIENDO TODA LA INFORMACION */
+.contenido{
+    padding: 25px 50px;
+    background-color: #f4f5f7;
+    text-align: center;
+}
+.regTitulo{
+    font-family: Titulo;
+    font-size: 30px;
+    letter-spacing: 5px;
+    margin-bottom: 10px;
+}
+.regiones{
+    width: 60%;
+    font-family: texto;
+    background-color: #0086EA;
+    color: #f4f5f7;
+    font-size: 25px;
+    border: none;
+    padding: 20px;
+}
+.mensajeInfo{
+    letter-spacing: 3px;
+    font-family: Texto;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+/* ESTILO DE LA TABLA */
+table.table-hover tbody tr:hover {
+    background-color: rgba(0, 134, 234, 0.79);
+    color: white;
+}
+
