@@ -84,13 +84,13 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'gomezjordan85@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', 'Administrador'),
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | Markdown Mail Settings
+    | Markdown mail Settings
     |--------------------------------------------------------------------------
     |
     | If you are using Markdown based email rendering, you may configure your
