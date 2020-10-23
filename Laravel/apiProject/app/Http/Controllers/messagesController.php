@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Message;
 use Illuminate\Http\Request;
 
 class messagesController extends Controller
@@ -13,7 +14,9 @@ class messagesController extends Controller
      */
     public function index()
     {
-        return "Funciona";
+        $message = Message::all();
+
+       return $message;
     }
 
     /**
@@ -22,9 +25,9 @@ class messagesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(/*Request $request*/ $id)
+    public function store(Request $request)
     {
-        return "El id es $id";
+
     }
 
     /**
@@ -35,7 +38,8 @@ class messagesController extends Controller
      */
     public function show($id)
     {
-        //
+        $message = Message::findOrFail($id);
+        return $message;
     }
 
     /**
@@ -58,6 +62,7 @@ class messagesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $message = Message::findOrFail($id)->delete();
+        return $message;
     }
 }
