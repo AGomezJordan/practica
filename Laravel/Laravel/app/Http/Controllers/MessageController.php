@@ -6,7 +6,7 @@ use App\Mail\mensajeRecibido;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
-class MessagesController extends Controller
+class MessageController extends Controller
 {
     public function store(){
         $mensaje = request()->validate([
@@ -21,6 +21,6 @@ class MessagesController extends Controller
         //Enviar email
         Mail::to('gomezjordan85@gmail.com')->queue(new mensajeRecibido($mensaje));
 
-        return "Mensaje enviado";
+        return back()->with('status', 'Recibimos tu menaje');
     }
 }

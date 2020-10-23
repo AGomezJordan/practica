@@ -1,8 +1,15 @@
 <?php
 
 Route::view('/', 'home')->name('home');
-Route::view('/about', 'about')->name('about');
-Route::get('/portfolio', 'PortfolioController@index')->name('portfolio');
-Route::view('/contact', 'contact')->name('contact');
+Route::view('/quienes-somos', 'about')->name('about');
 
-Route::post('contact', 'MessagesController@store');
+Route::resource('portafolio', 'projectController')
+    ->names('projects')
+    ->parameters(['portafolio'=> 'project']);
+
+Route::view('/contacto', 'contact')->name('contact');
+
+Route::post('contact', 'MessageController@store')->name('messages.store');
+
+Auth::routes(['register' => false]);
+
