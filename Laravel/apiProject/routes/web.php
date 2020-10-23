@@ -1,4 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\messagesController;
 
+Route::get('/messages', [messagesController::class, 'index']);
+Route::get('/messages/{id}', [messagesController::class, 'store']);
